@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://vx3mivk427nf"]
+
+[ext_resource type="Script" uid="uid://b7k180vvaa6nh" path="res://scripts/enemy_rl.gd" id="1_m0x22"]
+[ext_resource type="Shader" uid="uid://b6yim7xiodq8u" path="res://shaders/damage_flash.gdshader" id="2_4dv4e"]
+[ext_resource type="Texture2D" uid="uid://bjd2snpjol8k8" path="res://graphics/Sprite.png" id="3_4dv4e"]
+[ext_resource type="Texture2D" uid="uid://bdc17rjyopu0b" path="res://graphics/lightmap.png" id="3_qxtqe"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0amg8"]
+resource_local_to_scene = true
+shader = ExtResource("2_4dv4e")
+shader_parameter/damage_flash = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0amg8"]
+radius = 32.0
+
+[node name="Enemy_Base" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_m0x22")
+feint_retreat_duration = 0.8000000000029104
+speed = 200.0
+attack_range = 110.0
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+material = SubResource("ShaderMaterial_0amg8")
+texture = ExtResource("3_4dv4e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_0amg8")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+range_layer_min = -10
+texture = ExtResource("3_qxtqe")

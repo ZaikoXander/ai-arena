@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7ootlm7ykbj8"]
+
+[ext_resource type="Shader" uid="uid://b6yim7xiodq8u" path="res://shaders/damage_flash.gdshader" id="1_seq3m"]
+[ext_resource type="Script" uid="uid://dk32eue4xwu3w" path="res://scripts/enemy_fsm.gd" id="1_tx45e"]
+[ext_resource type="Texture2D" uid="uid://bdc17rjyopu0b" path="res://graphics/lightmap.png" id="3_b5f4e"]
+[ext_resource type="Texture2D" uid="uid://bjd2snpjol8k8" path="res://graphics/Sprite.png" id="3_seq3m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2v837"]
+resource_local_to_scene = true
+shader = ExtResource("1_seq3m")
+shader_parameter/damage_flash = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2v837"]
+radius = 32.0
+
+[node name="Enemy_Base" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_tx45e")
+patrol_points = Array[Vector2]([Vector2(-550, 500), Vector2(550, 500), Vector2(550, 400), Vector2(400, 350)])
+chase_distance = 225.0
+attack_distance = 100.0
+attack_range = 110.0
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+material = SubResource("ShaderMaterial_2v837")
+texture = ExtResource("3_seq3m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2v837")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+range_layer_min = -10
+texture = ExtResource("3_b5f4e")

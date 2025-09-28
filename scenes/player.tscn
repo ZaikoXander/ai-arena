@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://jjdvnkghck6u"]
+
+[ext_resource type="Script" uid="uid://5t3bg6fpkgdf" path="res://scripts/player.gd" id="1_3vyb7"]
+[ext_resource type="Shader" uid="uid://b6yim7xiodq8u" path="res://shaders/damage_flash.gdshader" id="2_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bjd2snpjol8k8" path="res://graphics/Sprite.png" id="3_dqkch"]
+[ext_resource type="Texture2D" uid="uid://bdc17rjyopu0b" path="res://graphics/lightmap.png" id="3_qhqgy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qlg0r"]
+resource_local_to_scene = true
+shader = ExtResource("2_dqkch")
+shader_parameter/damage_flash = 0.0
+shader_parameter/flash_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
+radius = 32.0
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+motion_mode = 1
+script = ExtResource("1_3vyb7")
+attack_range = 130.0
+
+[node name="Icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qlg0r")
+texture = ExtResource("3_dqkch")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_dqkch")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0, 0, 1, 1)
+range_layer_min = -10
+texture = ExtResource("3_qhqgy")
