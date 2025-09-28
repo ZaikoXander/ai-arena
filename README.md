@@ -3,6 +3,8 @@
 Entre na arena e enfrente inimigos controlados por diferentes **tipos de Inteligência Artificial**!
 Cada inimigo possui sua própria lógica e estratégia, colocando você diante de desafios cada vez mais inteligentes.
 
+![AI Arena Screenshot](.github/ai-arena.png)
+
 ---
 
 ## 🤖 Tipos de inimigos
